@@ -2246,10 +2246,15 @@ function autoGodzamokAction() {
 			var countC = Game.Objects['Cursor'].amount;
 			var countF = Game.Objects['Farm'].amount-1;
 
+			// also sell towers if you've got too many of them
+			var countWT = (M && FrozenCookies.towerLimit && M.magicM >= FrozenCookies.manaMax) ? Game.Objects['Wizard tower'].amount : 0 ; 
+
 			//Automatically sell all cursors and farms (except one) during Dragonflight and Click Frenzy if you worship Godzamok and prevent rapid buy/sell spam
 			if ( ( FrozenCookies.autoGodzamok >= 1 ) && hasClickBuff() && !Game.hasBuff('Devastation') ) {
 				Game.Objects['Cursor'].sell( countC );
 				Game.Objects['Farm'].sell( countF );
+				// sell the towers
+				Game.Objects['Wizard tower'].sell ( countWT );
 
 				if ( FrozenCookies.autoBuy == 1 ) {
 					if ( ( FrozenCookies.cursorLimit ) && countC > FrozenCookies.cursorMax ) {
