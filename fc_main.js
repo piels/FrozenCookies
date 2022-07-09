@@ -1473,7 +1473,7 @@ function upgradeStats(recalculate) {
             FrozenCookies.caches.upgrades = [];
         } else {
             var upgradeBlacklist = blacklist[FrozenCookies.blacklist].upgrades;
-            FrozenCookies.caches.upgrades = Game.UpgradesById.map(function (current) {
+            FrozenCookies.caches.upgrades = (Game.UpgradesById.map||Object.values(Game.UpgradesById).map)(function (current) {
                 if (!current.bought) {
                     if (isUnavailable(current, upgradeBlacklist)) {
                         return null;
